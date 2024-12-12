@@ -26,9 +26,6 @@ texture = ExtResource("3_kdhit")
 
 [node name="AimSystem2D" type="Node2D" parent="Player"]
 script = ExtResource("2_pmaik")
-aim_speed = 60.0
-limit_angle = true
-angle_max_deg = 180.0
 
 [node name="BiteArea" type="Area2D" parent="Player/AimSystem2D"]
 collision_layer = 0

@@ -9,11 +9,6 @@ extends Node2D
 
 @export var aim_speed: float = 30.0
 
-@export var limit_angle: bool = false
-
-@export var angle_min_deg: float = 0
-@export var angle_max_deg: float = 0
-
 var _target_global_position: Vector2
 
 var _target_rotation_radians: float = 0
@@ -28,14 +23,11 @@ func _process(delta):
 		
 	if aim_target != null:
 		aim_at(aim_target.global_position)
-	
-	if limit_angle:
-		_target_rotation_radians = clamp(_target_rotation_radians, deg_to_rad(angle_min_deg), deg_to_rad(angle_max_deg))
-	
+
 	if rotate_self:
 		rotation = get_angle_change(rotation, delta)
 
-func get_angle_change(rot: float, delta: float):
+func get_angle_change(rot: float, delta: float) -> float:
 	return lerp_angle(rot, rot + _target_rotation_radians, aim_speed * delta)
 	
 func aim_at(global_pos: Vector2):
