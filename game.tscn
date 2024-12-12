@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cc62vlkgtbvwy"]
+[gd_scene load_steps=8 format=3 uid="uid://cc62vlkgtbvwy"]
 
 [ext_resource type="Script" path="res://scripts/debug_commands.gd" id="1_b441e"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="2_pgvde"]
 [ext_resource type="Script" path="res://addons/aimsystem/aim_system_2d/aim_system_2d.gd" id="2_pmaik"]
 [ext_resource type="Texture2D" uid="uid://dbwc55h75l4r2" path="res://icon.svg" id="3_kdhit"]
+[ext_resource type="Script" path="res://scripts/bite_detector.gd" id="5_hbdff"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pxjl7"]
 radius = 39.0512
@@ -41,8 +42,9 @@ position = Vector2(237, 95)
 modulate = Color(0.933914, 0.464801, 3.85046e-07, 1)
 texture = ExtResource("3_kdhit")
 
-[node name="Hurtbox" type="Area2D" parent="Biteable"]
+[node name="BiteDetector" type="Area2D" parent="Biteable"]
 collision_mask = 0
+script = ExtResource("5_hbdff")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Biteable/Hurtbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Biteable/BiteDetector"]
 shape = SubResource("RectangleShape2D_mbsxt")
