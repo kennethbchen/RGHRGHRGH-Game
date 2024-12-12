@@ -2,8 +2,6 @@ extends Area2D
 
 class_name BiteDetector
 
-@onready var hurtbox: Area2D = $Hurtbox
-
 signal bite_started()
 signal bite_ended()
 
