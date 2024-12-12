@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://cc62vlkgtbvwy"]
+
+[ext_resource type="Script" path="res://scripts/debug_commands.gd" id="1_jhtol"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="2_hwhmv"]
+[ext_resource type="Texture2D" uid="uid://dbwc55h75l4r2" path="res://icon.svg" id="3_f0o6r"]
+[ext_resource type="Script" path="res://addons/aimsystem/aim_system_2d/aim_system_2d.gd" id="4_crl8y"]
+[ext_resource type="PackedScene" uid="uid://c3rg6ralpqeor" path="res://scenes/bite_detector.tscn" id="5_7sovw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pxjl7"]
+radius = 39.0512
+
+[node name="Game" type="Node2D"]
+
+[node name="DebugCommands" type="Node" parent="."]
+script = ExtResource("1_jhtol")
+
+[node name="Player" type="Node2D" parent="."]
+position = Vector2(313, 56)
+script = ExtResource("2_hwhmv")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+rotation = -1.5708
+texture = ExtResource("3_f0o6r")
+
+[node name="AimSystem2D" type="Node2D" parent="Player"]
+script = ExtResource("4_crl8y")
+aim_speed = 60.0
+
+[node name="BiteArea" type="Area2D" parent="Player/AimSystem2D"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/AimSystem2D/BiteArea"]
+position = Vector2(53, 0)
+shape = SubResource("CircleShape2D_pxjl7")
+
+[node name="Biteable" type="Node2D" parent="."]
+position = Vector2(237, 95)
+
+[node name="Sprite2D" type="Sprite2D" parent="Biteable"]
+modulate = Color(0.933914, 0.464801, 3.85046e-07, 1)
+texture = ExtResource("3_f0o6r")
+
+[node name="BiteDetector" parent="Biteable" instance=ExtResource("5_7sovw")]

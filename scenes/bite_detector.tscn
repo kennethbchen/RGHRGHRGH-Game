@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3rg6ralpqeor"]
+
+[ext_resource type="Script" path="res://scripts/bite_detector.gd" id="1_vugre"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mbsxt"]
+size = Vector2(64, 64)
+
+[node name="BiteDetector" type="Area2D"]
+collision_mask = 0
+script = ExtResource("1_vugre")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mbsxt")
