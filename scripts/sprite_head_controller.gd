@@ -3,7 +3,7 @@ extends Sprite2D
 @export var sprite_atlas: AtlasTexture
 
 var sprite_size: int = 64
-var num_sprites: int = 3
+var num_sprites: int = 4
 
 var center_angle_degrees: float = 0
 
@@ -20,7 +20,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	
-	#global_rotation_degrees = 0 #fmod(global_rotation_degrees, angle_extents_degrees / (num_sprites + 1))
+	
 	pass
 
 func set_sprite_from_rotation(rot_degrees: float) -> void:
@@ -32,7 +32,10 @@ func set_sprite_from_rotation(rot_degrees: float) -> void:
 	ind = clamp(ind, -num_sprites - 1, num_sprites - 1)
 	sprite_atlas.region.position = Vector2(ind * sprite_size, 0)
 	
+	print(ind)
 	var flip: bool = rot_degrees >= 0
 
 	flip_h = flip
+	
+	#global_rotation_degrees = clamp(rot_degrees, rot_degrees - angle_extents_degrees, rot_degrees + angle_extents_degrees )
 	

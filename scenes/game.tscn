@@ -23,6 +23,7 @@ script = ExtResource("2_hwhmv")
 
 [node name="Head" type="Sprite2D" parent="Player"]
 rotation = -1.5708
+scale = Vector2(2, 2)
 texture = ExtResource("3_pl4da")
 script = ExtResource("4_gfmcx")
 sprite_atlas = ExtResource("3_pl4da")
