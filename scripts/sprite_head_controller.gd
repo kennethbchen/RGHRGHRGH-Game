@@ -4,7 +4,8 @@ extends Sprite2D
 
 @export var sprite_angle_thresholds: Array[float] = []
 
-var sprite_size: int = 64
+var sprite_size: int = 128
+
 var num_sprites: int = 4
 
 var center_angle_degrees: float = 0
