@@ -4,6 +4,8 @@ extends Node2D
 
 @onready var hitbox: Area2D = $AimSystem2D/BiteArea
 
+@onready var sprite_head_controller: Sprite2D = $Head
+
 var bit_object_detector: BiteDetector = null
 
 # Transform that represents the transformation from global_transform -> bitten object's transform
@@ -25,6 +27,7 @@ func _process(delta: float) -> void:
 	if bit_object_detector:
 		bit_object_detector.get_parent().global_transform = global_transform * bite_relative_transform
 	
+	sprite_head_controller.set_sprite_from_rotation(global_rotation_degrees - 90)
 
 func _on_bite_clamp() -> void:
 	

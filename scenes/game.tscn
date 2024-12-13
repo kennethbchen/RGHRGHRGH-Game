@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cc62vlkgtbvwy"]
+[gd_scene load_steps=9 format=3 uid="uid://cc62vlkgtbvwy"]
 
 [ext_resource type="Script" path="res://scripts/debug_commands.gd" id="1_jhtol"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="2_hwhmv"]
 [ext_resource type="Texture2D" uid="uid://dbwc55h75l4r2" path="res://icon.svg" id="3_f0o6r"]
 [ext_resource type="Texture2D" uid="uid://bpq4isb5u6y1m" path="res://sprites/dog_atlas.tres" id="3_pl4da"]
 [ext_resource type="Script" path="res://addons/aimsystem/aim_system_2d/aim_system_2d.gd" id="4_crl8y"]
+[ext_resource type="Script" path="res://scripts/sprite_head_controller.gd" id="4_gfmcx"]
 [ext_resource type="PackedScene" uid="uid://c3rg6ralpqeor" path="res://scenes/bite_detector.tscn" id="5_7sovw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pxjl7"]
@@ -17,12 +18,14 @@ script = ExtResource("1_jhtol")
 
 [node name="Player" type="Node2D" parent="."]
 position = Vector2(313, 56)
-rotation = 1.57079
+rotation = 1.5708
 script = ExtResource("2_hwhmv")
 
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
+[node name="Head" type="Sprite2D" parent="Player"]
 rotation = -1.5708
 texture = ExtResource("3_pl4da")
+script = ExtResource("4_gfmcx")
+sprite_atlas = ExtResource("3_pl4da")
 
 [node name="AimSystem2D" type="Node2D" parent="Player"]
 script = ExtResource("4_crl8y")
