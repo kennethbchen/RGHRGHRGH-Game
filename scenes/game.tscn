@@ -16,6 +16,7 @@ script = ExtResource("1_jhtol")
 
 [node name="Player" type="Node2D" parent="."]
 position = Vector2(313, 56)
+rotation = 1.57079
 script = ExtResource("2_hwhmv")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
