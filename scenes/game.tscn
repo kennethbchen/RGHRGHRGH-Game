@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cc62vlkgtbvwy"]
+[gd_scene load_steps=9 format=3 uid="uid://db8ab1o12ivi1"]
 
 [ext_resource type="Script" path="res://scripts/debug_commands.gd" id="1_jhtol"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="2_hwhmv"]
@@ -27,7 +27,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("3_pl4da")
 script = ExtResource("4_gfmcx")
 sprite_atlas = ExtResource("3_pl4da")
-sprite_angle_thresholds = Array[float]([0.0, 10.0, 65.0, 80.0])
+sprite_angle_thresholds = Array[float]([0.0, 10.0, 40.0, 80.0])
 
 [node name="AimSystem2D" type="Node2D" parent="Player"]
 script = ExtResource("4_crl8y")
@@ -41,6 +41,7 @@ position = Vector2(53, 0)
 shape = SubResource("CircleShape2D_pxjl7")
 
 [node name="Biteable" type="Node2D" parent="."]
+z_index = -1
 position = Vector2(237, 95)
 
 [node name="Sprite2D" type="Sprite2D" parent="Biteable"]
