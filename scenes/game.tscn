@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" path="res://scripts/debug_commands.gd" id="1_jhtol"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="2_hwhmv"]
-[ext_resource type="Texture2D" uid="uid://dbwc55h75l4r2" path="res://icon.svg" id="3_f0o6r"]
 [ext_resource type="Texture2D" uid="uid://bpq4isb5u6y1m" path="res://sprites/dog_atlas.tres" id="3_pl4da"]
 [ext_resource type="Script" path="res://addons/aimsystem/aim_system_2d/aim_system_2d.gd" id="4_crl8y"]
 [ext_resource type="Script" path="res://scripts/sprite_head_controller.gd" id="4_gfmcx"]
 [ext_resource type="PackedScene" uid="uid://c3rg6ralpqeor" path="res://scenes/bite_detector.tscn" id="5_7sovw"]
+[ext_resource type="Texture2D" uid="uid://dq8qg5mt0a02y" path="res://sprites/box.png" id="6_nvy1s"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pxjl7"]
-radius = 39.0512
+radius = 17.0294
 
 [node name="Game" type="Node2D"]
 
@@ -17,13 +17,12 @@ radius = 39.0512
 script = ExtResource("1_jhtol")
 
 [node name="Player" type="Node2D" parent="."]
-position = Vector2(313, 56)
+position = Vector2(141, 34)
 rotation = 1.5708
 script = ExtResource("2_hwhmv")
 
 [node name="Head" type="Sprite2D" parent="Player"]
 rotation = -1.5708
-scale = Vector2(2, 2)
 texture = ExtResource("3_pl4da")
 script = ExtResource("4_gfmcx")
 sprite_atlas = ExtResource("3_pl4da")
@@ -37,15 +36,14 @@ aim_speed = 60.0
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/AimSystem2D/BiteArea"]
-position = Vector2(53, 0)
+position = Vector2(24, -9.33845e-05)
 shape = SubResource("CircleShape2D_pxjl7")
 
 [node name="Biteable" type="Node2D" parent="."]
 z_index = -1
-position = Vector2(237, 95)
+position = Vector2(83, 65)
 
 [node name="Sprite2D" type="Sprite2D" parent="Biteable"]
-modulate = Color(0.933914, 0.464801, 3.85046e-07, 1)
-texture = ExtResource("3_f0o6r")
+texture = ExtResource("6_nvy1s")
 
 [node name="BiteDetector" parent="Biteable" instance=ExtResource("5_7sovw")]
