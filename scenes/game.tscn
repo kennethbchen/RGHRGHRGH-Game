@@ -27,6 +27,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("3_pl4da")
 script = ExtResource("4_gfmcx")
 sprite_atlas = ExtResource("3_pl4da")
+sprite_angle_thresholds = Array[float]([0.0, 10.0, 65.0, 80.0])
 
 [node name="AimSystem2D" type="Node2D" parent="Player"]
 script = ExtResource("4_crl8y")

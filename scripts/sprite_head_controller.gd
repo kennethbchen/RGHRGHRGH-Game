@@ -2,6 +2,8 @@ extends Sprite2D
 
 @export var sprite_atlas: AtlasTexture
 
+@export var sprite_angle_thresholds: Array[float] = []
+
 var sprite_size: int = 64
 var num_sprites: int = 4
 
@@ -25,17 +27,17 @@ func _process(delta: float) -> void:
 
 func set_sprite_from_rotation(rot_degrees: float) -> void:
 	
-	var from = center_angle_degrees
-	var to = from + angle_extents_degrees
+	var chosen_index: int = 0
 	
-	var ind: int = abs(inverse_lerp(from, to, rot_degrees) * (num_sprites - 1))
-	ind = clamp(ind, -num_sprites - 1, num_sprites - 1)
-	sprite_atlas.region.position = Vector2(ind * sprite_size, 0)
+	# Go through the list of angles in reverse order
+	# Find the first angle that rot_degrees is greater than
+	# That index is the index of the sprite atlas we should use
+	for i in range(sprite_angle_thresholds.size() - 1, -1, -1):
+		if abs(rot_degrees) >= sprite_angle_thresholds[i]:
+			chosen_index = i
+			break
 	
-	print(ind)
-	var flip: bool = rot_degrees >= 0
+	sprite_atlas.region.position = Vector2(chosen_index * sprite_size, 0)
 
-	flip_h = flip
-	
-	#global_rotation_degrees = clamp(rot_degrees, rot_degrees - angle_extents_degrees, rot_degrees + angle_extents_degrees )
+	flip_h = rot_degrees >= 0
 	
