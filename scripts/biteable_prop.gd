@@ -43,7 +43,9 @@ func _process(delta: float) -> void:
 			prev_rotation = global_rotation
 
 func _on_shaken() -> void:
-	print("shook")
+
+	sprite.bump(estimated_velocity.normalized() * 35)
+	
 
 func _on_bite_started() -> void:
 	current_state = STATE.BITTEN

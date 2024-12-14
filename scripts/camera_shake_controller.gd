@@ -14,7 +14,8 @@ func _ready() -> void:
 func _unhandled_input(event):
 	
 	if event.is_action_pressed("debug_bump_test"):
-		bump(Vector2(randf_range(-1,1), randf_range(-1,1)) * 30) 
+		pass
+		#bump(Vector2(randf_range(-1,1), randf_range(-1,1)) * 30) 
 
 func _process(delta):
 	
