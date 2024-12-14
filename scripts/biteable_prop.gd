@@ -2,6 +2,9 @@ extends CharacterBody2D
 
 enum STATE {NORMAL, BITTEN, DESTROYED}
 
+@export var velocity_limit: float = 800
+@export var angular_velocity_limit: float = 4
+
 var current_state: STATE = STATE.NORMAL
 
 var prev_rotation: float
@@ -17,6 +20,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	
+	velocity = velocity.limit_length(velocity_limit)
+	angular_velocity = clamp(angular_velocity, -angular_velocity_limit, angular_velocity_limit)
 	match current_state:
 		STATE.NORMAL:
 			

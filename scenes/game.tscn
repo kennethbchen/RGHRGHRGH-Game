@@ -46,11 +46,12 @@ shape = SubResource("CircleShape2D_pxjl7")
 
 [node name="Biteable" type="CharacterBody2D" parent="."]
 z_index = -1
-position = Vector2(155, 158)
+position = Vector2(155, 128)
 collision_layer = 0
 collision_mask = 0
 motion_mode = 1
 script = ExtResource("6_qxxue")
+angular_velocity_limit = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Biteable"]
 visible = false
