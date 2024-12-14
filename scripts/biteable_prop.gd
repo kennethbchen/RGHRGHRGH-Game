@@ -5,6 +5,8 @@ enum STATE {NORMAL, BITTEN, DESTROYED}
 @export var velocity_limit: float = 800
 @export var angular_velocity_limit: float = 4
 
+@onready var sprite: Sprite2D = $Sprite2D
+
 var current_state: STATE = STATE.NORMAL
 
 var prev_rotation: float
@@ -39,9 +41,10 @@ func _process(delta: float) -> void:
 			# Estimate angular velocity
 			estimated_angular_velocity = (rotation - prev_rotation) / delta
 			prev_rotation = global_rotation
-			
-			return
-	
+
+func _on_shaken() -> void:
+	print("shook")
+
 func _on_bite_started() -> void:
 	current_state = STATE.BITTEN
 	velocity = Vector2.ZERO

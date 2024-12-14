@@ -70,3 +70,6 @@ func _on_shake_occurred(clockwise: bool):
 	var tangent = transform.x.rotated(PI/2 * 1 if clockwise else -1)
 	
 	EventBus.camera_shake_requested.emit(tangent * 40)
+	
+	
+	bit_object_detector.shake()

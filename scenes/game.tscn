@@ -83,3 +83,4 @@ texture = ExtResource("11_vqxsg")
 
 [connection signal="bite_ended" from="Biteable/BiteDetector" to="Biteable" method="_on_bite_ended"]
 [connection signal="bite_started" from="Biteable/BiteDetector" to="Biteable" method="_on_bite_started"]
+[connection signal="shaken" from="Biteable/BiteDetector" to="Biteable" method="_on_shaken"]
