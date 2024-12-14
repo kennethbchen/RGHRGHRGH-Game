@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://db8ab1o12ivi1"]
+[gd_scene load_steps=11 format=3 uid="uid://db8ab1o12ivi1"]
 
 [ext_resource type="Script" path="res://scripts/debug_commands.gd" id="1_jhtol"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="2_hwhmv"]
@@ -7,9 +7,13 @@
 [ext_resource type="Script" path="res://scripts/sprite_head_controller.gd" id="4_gfmcx"]
 [ext_resource type="PackedScene" uid="uid://c3rg6ralpqeor" path="res://scenes/bite_detector.tscn" id="5_7sovw"]
 [ext_resource type="Texture2D" uid="uid://dq8qg5mt0a02y" path="res://sprites/box.png" id="6_nvy1s"]
+[ext_resource type="Script" path="res://scripts/biteable_prop.gd" id="6_qxxue"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pxjl7"]
 radius = 29.0172
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gvno0"]
+size = Vector2(56, 58)
 
 [node name="Game" type="Node2D"]
 
@@ -40,11 +44,22 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/AimSystem2D/BiteArea"]
 shape = SubResource("CircleShape2D_pxjl7")
 
-[node name="Biteable" type="Node2D" parent="."]
+[node name="Biteable" type="CharacterBody2D" parent="."]
 z_index = -1
-position = Vector2(154, 139)
+position = Vector2(157, 208)
+collision_layer = 0
+collision_mask = 0
+motion_mode = 1
+script = ExtResource("6_qxxue")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Biteable"]
+visible = false
+shape = SubResource("RectangleShape2D_gvno0")
 
 [node name="Sprite2D" type="Sprite2D" parent="Biteable"]
 texture = ExtResource("6_nvy1s")
 
 [node name="BiteDetector" parent="Biteable" instance=ExtResource("5_7sovw")]
+
+[connection signal="bite_ended" from="Biteable/BiteDetector" to="Biteable" method="_on_bite_ended"]
+[connection signal="bite_started" from="Biteable/BiteDetector" to="Biteable" method="_on_bite_started"]
