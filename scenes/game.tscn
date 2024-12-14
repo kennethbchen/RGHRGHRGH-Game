@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://db8ab1o12ivi1"]
+[gd_scene load_steps=14 format=3 uid="uid://db8ab1o12ivi1"]
 
 [ext_resource type="Script" path="res://scripts/debug_commands.gd" id="1_jhtol"]
 [ext_resource type="Script" path="res://scripts/camera_shake_controller.gd" id="2_7nfss"]
@@ -7,8 +7,10 @@
 [ext_resource type="Script" path="res://addons/aimsystem/aim_system_2d/aim_system_2d.gd" id="4_crl8y"]
 [ext_resource type="Script" path="res://scripts/sprite_head_controller.gd" id="4_gfmcx"]
 [ext_resource type="PackedScene" uid="uid://c3rg6ralpqeor" path="res://scenes/bite_detector.tscn" id="5_7sovw"]
+[ext_resource type="Script" path="res://scripts/rotation_intensity_measurer.gd" id="6_4lvt7"]
 [ext_resource type="Texture2D" uid="uid://dq8qg5mt0a02y" path="res://sprites/box.png" id="6_nvy1s"]
 [ext_resource type="Script" path="res://scripts/biteable_prop.gd" id="6_qxxue"]
+[ext_resource type="Texture2D" uid="uid://dbwc55h75l4r2" path="res://icon.svg" id="11_vqxsg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pxjl7"]
 radius = 29.0172
@@ -26,6 +28,8 @@ position = Vector2(162, 162)
 
 [node name="CameraShakeController" type="Node" parent="Camera2D"]
 script = ExtResource("2_7nfss")
+offset_decay = 20.0
+camera_speed = 30.0
 
 [node name="Player" type="Node2D" parent="."]
 position = Vector2(156, 65)
@@ -39,17 +43,21 @@ script = ExtResource("4_gfmcx")
 sprite_atlas = ExtResource("3_pl4da")
 sprite_angle_thresholds = Array[float]([0.0, 10.0, 40.0, 80.0])
 
-[node name="AimSystem2D" type="Node2D" parent="Player"]
-script = ExtResource("4_crl8y")
-aim_speed = 60.0
+[node name="RotationIntensityMeasurer" type="Node2D" parent="Player"]
+script = ExtResource("6_4lvt7")
+min_shake_velocity = 10.0
 
-[node name="BiteArea" type="Area2D" parent="Player/AimSystem2D"]
-position = Vector2(50, -0.000181)
+[node name="BiteArea" type="Area2D" parent="Player"]
+position = Vector2(50, -0.000183105)
 collision_layer = 0
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/AimSystem2D/BiteArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/BiteArea"]
 shape = SubResource("CircleShape2D_pxjl7")
+
+[node name="AimSystem2D" type="Node2D" parent="Player"]
+script = ExtResource("4_crl8y")
+aim_speed = 60.0
 
 [node name="Biteable" type="CharacterBody2D" parent="."]
 z_index = -1
@@ -68,6 +76,10 @@ shape = SubResource("RectangleShape2D_gvno0")
 texture = ExtResource("6_nvy1s")
 
 [node name="BiteDetector" parent="Biteable" instance=ExtResource("5_7sovw")]
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(139, 252)
+texture = ExtResource("11_vqxsg")
 
 [connection signal="bite_ended" from="Biteable/BiteDetector" to="Biteable" method="_on_bite_ended"]
 [connection signal="bite_started" from="Biteable/BiteDetector" to="Biteable" method="_on_bite_started"]

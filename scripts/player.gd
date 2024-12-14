@@ -2,9 +2,11 @@ extends Node2D
 
 @onready var aim_system: AimSystem2D = $AimSystem2D
 
-@onready var hitbox: Area2D = $AimSystem2D/BiteArea
+@onready var hitbox: Area2D = $BiteArea
 
 @onready var sprite_head_controller: Sprite2D = $Head
+
+@onready var rotation_intensity_measurer: Node2D = $RotationIntensityMeasurer
 
 var bit_object_detector: BiteDetector = null
 
@@ -12,8 +14,8 @@ var bit_object_detector: BiteDetector = null
 var bite_relative_transform: Transform2D
 
 func _ready() -> void:
-	pass # Replace with function body.
-
+	rotation_intensity_measurer.shake_occurred.connect(_on_shake_occurred)
+	
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("game_bite"):
 		_on_bite_clamp()
@@ -23,7 +25,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	aim_system.aim_at_mouse()
 	rotation = aim_system.get_angle_change(rotation, delta)
-	
+
 	if bit_object_detector:
 		bit_object_detector.get_parent().global_transform = global_transform * bite_relative_transform
 	
@@ -56,3 +58,15 @@ func _release_bitten_object():
 	bit_object_detector.end_bite()
 	
 	bit_object_detector = null
+
+func _on_shake_occurred(clockwise: bool):
+	# Player has rotated very fast
+	
+	if not bit_object_detector:
+		return
+	
+	# Find the direction perpendicular to facing direction
+	# And pointing left / right based on rotation direction
+	var tangent = transform.x.rotated(PI/2 * 1 if clockwise else -1)
+	
+	EventBus.camera_shake_requested.emit(tangent * 40)
