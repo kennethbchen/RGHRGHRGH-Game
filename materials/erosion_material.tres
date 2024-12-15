@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bspfq31lhs2il"]
+
+[ext_resource type="Shader" uid="uid://m8dbnqmb3uei" path="res://shaders/erosion.tres" id="1_lyogm"]
+
+[resource]
+shader = ExtResource("1_lyogm")
+shader_parameter/ErosionLevel = 0

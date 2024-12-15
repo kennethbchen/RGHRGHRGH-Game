@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://db8ab1o12ivi1"]
+[gd_scene load_steps=16 format=3 uid="uid://db8ab1o12ivi1"]
 
 [ext_resource type="Script" path="res://scripts/debug_commands.gd" id="1_jhtol"]
 [ext_resource type="Script" path="res://scripts/camera_shake_controller.gd" id="2_7nfss"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/rotation_intensity_measurer.gd" id="6_4lvt7"]
 [ext_resource type="Texture2D" uid="uid://dq8qg5mt0a02y" path="res://sprites/box.png" id="6_nvy1s"]
 [ext_resource type="Script" path="res://scripts/biteable_prop.gd" id="6_qxxue"]
+[ext_resource type="Material" uid="uid://bspfq31lhs2il" path="res://materials/erosion_material.tres" id="9_ucwcv"]
 [ext_resource type="Script" path="res://scripts/node_shake_controller.gd" id="10_004wk"]
 [ext_resource type="Texture2D" uid="uid://dbwc55h75l4r2" path="res://icon.svg" id="11_vqxsg"]
 
@@ -62,7 +63,7 @@ aim_speed = 60.0
 
 [node name="Biteable" type="CharacterBody2D" parent="."]
 z_index = -1
-position = Vector2(155, 128)
+position = Vector2(156, 178)
 collision_layer = 0
 collision_mask = 0
 motion_mode = 1
@@ -74,12 +75,14 @@ visible = false
 shape = SubResource("RectangleShape2D_gvno0")
 
 [node name="Sprite2D" type="Sprite2D" parent="Biteable"]
+material = ExtResource("9_ucwcv")
 texture = ExtResource("6_nvy1s")
 script = ExtResource("10_004wk")
 offset_decay = 20.0
 speed = 10.0
 
 [node name="BiteDetector" parent="Biteable" instance=ExtResource("5_7sovw")]
+visible = false
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(139, 252)
