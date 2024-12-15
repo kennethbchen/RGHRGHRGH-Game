@@ -4,4 +4,7 @@
 
 [resource]
 shader = ExtResource("1_lyogm")
-shader_parameter/ErosionLevel = 0
+shader_parameter/ErosionFactor = 0.0
+shader_parameter/MaxErosion = 0.5
+shader_parameter/SpriteSize = 64
+shader_parameter/InsideColor = Color(0.39, 0.307385, 0.2301, 1)
