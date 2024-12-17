@@ -10,6 +10,8 @@ enum STATE {NORMAL, BITTEN, DESTROYED}
 
 @onready var sprite: Sprite2D = $Sprite2D
 
+@onready var particles: CPUParticles2D = $CPUParticles2D
+
 var current_state: STATE = STATE.NORMAL
 
 var prev_rotation: float
@@ -25,14 +27,23 @@ var current_erosion_level: int = 0:
 		current_erosion_level += 1
 		current_erosion_level = clamp(current_erosion_level, 0, erosion_levels)
 
+var particle_emit_start_time: float = 0
+
 func _ready() -> void:
 	
 	sprite.material.set("shader_parameter/ErosionFactor", 0)
 
 func _process(delta: float) -> void:
 	
+	# Only emit particles for a very short amount of time
+	# This is better than using explosiveness because the particle can keep emitting
+	# for multiple bursts
+	if particles.emitting and Time.get_ticks_msec() - particle_emit_start_time > 50:
+		particles.emitting = false
+		
 	velocity = velocity.limit_length(velocity_limit)
 	angular_velocity = clamp(angular_velocity, -angular_velocity_limit, angular_velocity_limit)
+	
 	match current_state:
 		STATE.NORMAL:
 			
@@ -59,6 +70,15 @@ func _on_shaken() -> void:
 	sprite.material.set("shader_parameter/ErosionFactor", erosion_factor)
 	sprite.bump(estimated_velocity.normalized() * 35)
 	
+	_pulse_particles()
+	
+func _pulse_particles() -> void:
+	
+	particles.global_rotation = estimated_velocity.angle()
+	
+	particles.emitting = true
+	particle_emit_start_time = Time.get_ticks_msec()
+
 
 func _on_bite_started() -> void:
 	current_state = STATE.BITTEN
