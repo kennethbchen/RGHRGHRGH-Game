@@ -32,6 +32,8 @@ var particle_emit_start_time: float = 0
 func _ready() -> void:
 	
 	sprite.material.set("shader_parameter/ErosionFactor", 0)
+	
+	particles.emitting = false
 
 func _process(delta: float) -> void:
 	

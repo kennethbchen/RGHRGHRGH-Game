@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://db8ab1o12ivi1"]
+[gd_scene load_steps=20 format=3 uid="uid://db8ab1o12ivi1"]
 
 [ext_resource type="Script" path="res://scripts/debug_commands.gd" id="1_jhtol"]
 [ext_resource type="Script" path="res://scripts/camera_shake_controller.gd" id="2_7nfss"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dq8qg5mt0a02y" path="res://sprites/box.png" id="6_nvy1s"]
 [ext_resource type="Script" path="res://scripts/biteable_prop.gd" id="6_qxxue"]
 [ext_resource type="Material" uid="uid://bspfq31lhs2il" path="res://materials/erosion_material.tres" id="9_ucwcv"]
+[ext_resource type="Texture2D" uid="uid://daxtntoxlrtbj" path="res://sprites/box_particle.png" id="9_ytrwf"]
 [ext_resource type="Script" path="res://scripts/node_shake_controller.gd" id="10_004wk"]
 [ext_resource type="Texture2D" uid="uid://dbwc55h75l4r2" path="res://icon.svg" id="11_vqxsg"]
 
@@ -23,11 +24,11 @@ _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.204633, 58.5736), 0.0, 0.0, 0,
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_g4d38"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.559846, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.861004, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="Gradient" id="Gradient_bxu3o"]
-offsets = PackedFloat32Array(0.4329, 1)
+offsets = PackedFloat32Array(0.640693, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gvno0"]
@@ -86,24 +87,25 @@ erosion_levels = 20
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Biteable"]
 emitting = false
-amount = 16
-lifetime = 0.5
+amount = 24
 lifetime_randomness = 0.68
+texture = ExtResource("9_ytrwf")
 emission_shape = 1
 emission_sphere_radius = 16.0
 spread = 20.0
 gravity = Vector2(0, 0)
-initial_velocity_min = 700.0
-initial_velocity_max = 700.0
-angular_velocity_min = -200.0
-angular_velocity_max = 200.0
+initial_velocity_min = 600.0
+initial_velocity_max = 800.0
+angular_velocity_min = -300.0
+angular_velocity_max = 300.0
 damping_min = 23.669
 damping_max = 23.669
 damping_curve = SubResource("Curve_0gxit")
-scale_amount_min = 8.0
-scale_amount_max = 10.0
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.75
+scale_amount_max = 1.25
 scale_amount_curve = SubResource("Curve_g4d38")
-color = Color(0.85098, 0.627451, 0.4, 1)
 color_ramp = SubResource("Gradient_bxu3o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Biteable"]
