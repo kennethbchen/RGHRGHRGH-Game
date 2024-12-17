@@ -8,6 +8,8 @@ extends Node2D
 
 @onready var rotation_intensity_measurer: Node2D = $RotationIntensityMeasurer
 
+@onready var shake_combo_controller: Node = $ShakeComboController
+
 var bit_object_detector: BiteDetector = null
 
 # Transform that represents the transformation from global_transform -> bitten object's transform
@@ -71,5 +73,5 @@ func _on_shake_occurred(clockwise: bool):
 	
 	EventBus.camera_shake_requested.emit(tangent * 40)
 	
-	
+	shake_combo_controller.shake()
 	bit_object_detector.shake()
