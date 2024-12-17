@@ -1,5 +1,6 @@
 [gd_scene load_steps=29 format=3 uid="uid://db8ab1o12ivi1"]
 
+[ext_resource type="Texture2D" uid="uid://cpb82cl86rmfk" path="res://sprites/background.png" id="1_7xn2v"]
 [ext_resource type="AudioStream" uid="uid://fl6852hi2j28" path="res://audio/cw_amen10_135.wav" id="1_ip1cf"]
 [ext_resource type="Script" path="res://scripts/debug_commands.gd" id="1_jhtol"]
 [ext_resource type="Script" path="res://scripts/camera_shake_controller.gd" id="2_7nfss"]
@@ -18,7 +19,6 @@
 [ext_resource type="Texture2D" uid="uid://daxtntoxlrtbj" path="res://sprites/box_particle.png" id="9_ytrwf"]
 [ext_resource type="Script" path="res://scripts/node_shake_controller.gd" id="10_004wk"]
 [ext_resource type="Texture2D" uid="uid://d2tu8db4uyf6" path="res://sprites/bite_particle.png" id="11_r2aj2"]
-[ext_resource type="Texture2D" uid="uid://dbwc55h75l4r2" path="res://icon.svg" id="11_vqxsg"]
 [ext_resource type="AudioStream" uid="uid://dorp0ploeac85" path="res://audio/box_damage.wav" id="12_4vajp"]
 
 [sub_resource type="Curve" id="Curve_8w7v5"]
@@ -56,6 +56,12 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 size = Vector2(56, 58)
 
 [node name="Game" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(162, 162)
+scale = Vector2(1.69753, 1.69753)
+texture = ExtResource("1_7xn2v")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_ip1cf")
@@ -175,10 +181,6 @@ speed = 10.0
 
 [node name="BiteDetector" parent="Biteable" instance=ExtResource("5_7sovw")]
 visible = false
-
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(139, 252)
-texture = ExtResource("11_vqxsg")
 
 [connection signal="shake_combo_ended" from="Player/ShakeComboController" to="MusicPlayer" method="_on_shake_combo_ended"]
 [connection signal="shake_combo_started" from="Player/ShakeComboController" to="MusicPlayer" method="_on_shake_combo_started"]

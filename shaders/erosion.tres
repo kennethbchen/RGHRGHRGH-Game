@@ -72,17 +72,17 @@ default_value_enabled = true
 default_value = 64
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_62oxi"]
-size = Vector2(1172, 358)
+size = Vector2(1172, 529)
 title = "Quantize UV"
 attached_nodes = PackedInt32Array(21, 23, 18, 20, 22)
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_qxhmg"]
-size = Vector2(580, 422)
+size = Vector2(580, 659)
 title = "Control Erosion Level"
 attached_nodes = PackedInt32Array(17, 27, 28)
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_ls738"]
-size = Vector2(580, 150)
+size = Vector2(580, 283)
 title = "Sprite Alpha Mask"
 attached_nodes = PackedInt32Array(10, 11)
 
@@ -158,7 +158,7 @@ linked_parent_graph_frame = 43
 operator = 2
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_pf1im"]
-size = Vector2(692, 134)
+size = Vector2(692, 433)
 title = "Avoid Erosion Mask"
 attached_nodes = PackedInt32Array(5, 2)
 
@@ -168,23 +168,23 @@ linked_parent_graph_frame = 40
 operator = 1
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_wqnax"]
-size = Vector2(820, 262)
+size = Vector2(820, 561)
 title = "Receives Inside Color Mask"
 attached_nodes = PackedInt32Array(30, 39, 29)
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_l48cn"]
-size = Vector2(760, 254)
+size = Vector2(761, 587)
 title = "Receives Original Sprite Color Mask"
 attached_nodes = PackedInt32Array(36, 33, 43)
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_pm4ah"]
-size = Vector2(676, 246)
+size = Vector2(676, 482)
 title = "Set Inside Color"
 attached_nodes = PackedInt32Array(31, 6)
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_im3mb"]
 linked_parent_graph_frame = 41
-size = Vector2(256, 118)
+size = Vector2(257, 482)
 title = "Set Original Sprite Color"
 attached_nodes = PackedInt32Array(37)
 
@@ -328,6 +328,7 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(876.936, 529.795)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(4416, 1440)
