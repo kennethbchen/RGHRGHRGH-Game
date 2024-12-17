@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://db8ab1o12ivi1"]
+[gd_scene load_steps=29 format=3 uid="uid://db8ab1o12ivi1"]
 
 [ext_resource type="AudioStream" uid="uid://fl6852hi2j28" path="res://audio/cw_amen10_135.wav" id="1_ip1cf"]
 [ext_resource type="Script" path="res://scripts/debug_commands.gd" id="1_jhtol"]
@@ -11,13 +11,24 @@
 [ext_resource type="PackedScene" uid="uid://c3rg6ralpqeor" path="res://scenes/bite_detector.tscn" id="5_7sovw"]
 [ext_resource type="Script" path="res://scripts/shake_combo_controller.gd" id="5_23ut6"]
 [ext_resource type="Script" path="res://scripts/rotation_intensity_measurer.gd" id="6_4lvt7"]
+[ext_resource type="AudioStream" uid="uid://3dfc2qvfukst" path="res://audio/bite_start.wav" id="6_d21rt"]
 [ext_resource type="Texture2D" uid="uid://dq8qg5mt0a02y" path="res://sprites/box.png" id="6_nvy1s"]
 [ext_resource type="Script" path="res://scripts/biteable_prop.gd" id="6_qxxue"]
 [ext_resource type="Material" uid="uid://bspfq31lhs2il" path="res://materials/erosion_material.tres" id="9_ucwcv"]
 [ext_resource type="Texture2D" uid="uid://daxtntoxlrtbj" path="res://sprites/box_particle.png" id="9_ytrwf"]
 [ext_resource type="Script" path="res://scripts/node_shake_controller.gd" id="10_004wk"]
+[ext_resource type="Texture2D" uid="uid://d2tu8db4uyf6" path="res://sprites/bite_particle.png" id="11_r2aj2"]
 [ext_resource type="Texture2D" uid="uid://dbwc55h75l4r2" path="res://icon.svg" id="11_vqxsg"]
 [ext_resource type="AudioStream" uid="uid://dorp0ploeac85" path="res://audio/box_damage.wav" id="12_4vajp"]
+
+[sub_resource type="Curve" id="Curve_8w7v5"]
+max_value = 100.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.440154, 52.0064), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_kdf8w"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.46332, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pxjl7"]
 radius = 29.0172
@@ -67,6 +78,28 @@ position = Vector2(156, 65)
 rotation = 1.5708
 script = ExtResource("2_hwhmv")
 
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource("6_d21rt")
+
+[node name="BiteParticles" type="CPUParticles2D" parent="Player"]
+position = Vector2(43, -0.000148189)
+emitting = false
+amount = 10
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.25
+texture = ExtResource("11_r2aj2")
+particle_flag_align_y = true
+spread = 80.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 240.0
+initial_velocity_max = 311.94
+damping_min = 8.634
+damping_max = 17.267
+damping_curve = SubResource("Curve_8w7v5")
+scale_amount_curve = SubResource("Curve_kdf8w")
+
 [node name="ShakeComboController" type="Node" parent="Player"]
 script = ExtResource("5_23ut6")
 
@@ -82,7 +115,7 @@ script = ExtResource("6_4lvt7")
 min_shake_velocity = 10.0
 
 [node name="BiteArea" type="Area2D" parent="Player"]
-position = Vector2(50, -0.000183105)
+position = Vector2(29, -0.000107085)
 collision_layer = 0
 metadata/_edit_group_ = true
 
@@ -113,12 +146,12 @@ lifetime_randomness = 0.68
 texture = ExtResource("9_ytrwf")
 emission_shape = 1
 emission_sphere_radius = 16.0
-spread = 20.0
+spread = 9.64
 gravity = Vector2(0, 0)
 initial_velocity_min = 600.0
 initial_velocity_max = 800.0
-angular_velocity_min = -300.0
-angular_velocity_max = 300.0
+angular_velocity_min = -500.0
+angular_velocity_max = 500.0
 damping_min = 23.669
 damping_max = 23.669
 damping_curve = SubResource("Curve_0gxit")

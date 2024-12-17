@@ -10,6 +10,10 @@ extends Node2D
 
 @onready var shake_combo_controller: Node = $ShakeComboController
 
+@onready var particles: CPUParticles2D = $BiteParticles
+
+@onready var sfx: AudioStreamPlayer = $SFXPlayer
+
 var bit_object_detector: BiteDetector = null
 
 # Transform that represents the transformation from global_transform -> bitten object's transform
@@ -39,6 +43,11 @@ func _on_bite_clamp() -> void:
 		hitbox.get_overlapping_areas()[0] is BiteDetector:
 		
 		_bite_object(hitbox.get_overlapping_areas()[0])
+		
+		sfx.play()
+		
+		particles.restart()
+		particles.emitting = true
 
 func _on_bite_release() -> void:
 	_release_bitten_object()
