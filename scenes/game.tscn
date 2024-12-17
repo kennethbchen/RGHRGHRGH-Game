@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://db8ab1o12ivi1"]
+[gd_scene load_steps=25 format=3 uid="uid://db8ab1o12ivi1"]
 
 [ext_resource type="AudioStream" uid="uid://fl6852hi2j28" path="res://audio/cw_amen10_135.wav" id="1_ip1cf"]
 [ext_resource type="Script" path="res://scripts/debug_commands.gd" id="1_jhtol"]
@@ -17,9 +17,16 @@
 [ext_resource type="Texture2D" uid="uid://daxtntoxlrtbj" path="res://sprites/box_particle.png" id="9_ytrwf"]
 [ext_resource type="Script" path="res://scripts/node_shake_controller.gd" id="10_004wk"]
 [ext_resource type="Texture2D" uid="uid://dbwc55h75l4r2" path="res://icon.svg" id="11_vqxsg"]
+[ext_resource type="AudioStream" uid="uid://dorp0ploeac85" path="res://audio/box_damage.wav" id="12_4vajp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pxjl7"]
 radius = 29.0172
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mbyjr"]
+random_pitch = 2.0
+random_volume_offset_db = 1.0
+streams_count = 1
+stream_0/stream = ExtResource("12_4vajp")
 
 [sub_resource type="Curve" id="Curve_0gxit"]
 max_value = 100.0
@@ -39,8 +46,9 @@ size = Vector2(56, 58)
 
 [node name="Game" type="Node2D"]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_ip1cf")
+bus = &"Music"
 script = ExtResource("2_yqka2")
 
 [node name="DebugCommands" type="Node" parent="."]
@@ -94,6 +102,10 @@ motion_mode = 1
 script = ExtResource("6_qxxue")
 angular_velocity_limit = 20.0
 
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="Biteable"]
+stream = SubResource("AudioStreamRandomizer_mbyjr")
+volume_db = -10.0
+
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Biteable"]
 emitting = false
 amount = 16
@@ -135,8 +147,8 @@ visible = false
 position = Vector2(139, 252)
 texture = ExtResource("11_vqxsg")
 
-[connection signal="shake_combo_ended" from="Player/ShakeComboController" to="AudioStreamPlayer" method="_on_shake_combo_ended"]
-[connection signal="shake_combo_started" from="Player/ShakeComboController" to="AudioStreamPlayer" method="_on_shake_combo_started"]
+[connection signal="shake_combo_ended" from="Player/ShakeComboController" to="MusicPlayer" method="_on_shake_combo_ended"]
+[connection signal="shake_combo_started" from="Player/ShakeComboController" to="MusicPlayer" method="_on_shake_combo_started"]
 [connection signal="bite_ended" from="Biteable/BiteDetector" to="Biteable" method="_on_bite_ended"]
 [connection signal="bite_started" from="Biteable/BiteDetector" to="Biteable" method="_on_bite_started"]
 [connection signal="shaken" from="Biteable/BiteDetector" to="Biteable" method="_on_shaken"]

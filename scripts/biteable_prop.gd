@@ -12,6 +12,8 @@ enum STATE {NORMAL, BITTEN, DESTROYED}
 
 @onready var particles: CPUParticles2D = $CPUParticles2D
 
+@onready var sfx: AudioStreamPlayer = $SFXPlayer
+
 var current_state: STATE = STATE.NORMAL
 
 var prev_rotation: float
@@ -72,6 +74,7 @@ func _on_shaken() -> void:
 	sprite.material.set("shader_parameter/ErosionFactor", erosion_factor)
 	sprite.bump(estimated_velocity.normalized() * 35)
 	
+	sfx.play()
 	_pulse_particles()
 	
 func _pulse_particles() -> void:
