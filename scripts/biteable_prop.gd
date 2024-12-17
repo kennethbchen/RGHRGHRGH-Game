@@ -72,7 +72,7 @@ func _on_shaken() -> void:
 	var erosion_factor: float = (1.0 / erosion_levels) * current_erosion_level
 	
 	sprite.material.set("shader_parameter/ErosionFactor", erosion_factor)
-	sprite.bump(estimated_velocity.normalized() * 35)
+	sprite.bump(estimated_velocity.normalized() * 60)
 	
 	sfx.play()
 	_pulse_particles()
