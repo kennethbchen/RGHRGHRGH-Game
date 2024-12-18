@@ -6,7 +6,7 @@ enum STATE {NORMAL, BITTEN, DESTROYED}
 
 @export var angular_velocity_limit: float = 4
 
-@export var erosion_levels: int = 20
+@export var erosion_levels: int = 30
 
 @onready var sprite: Sprite2D = $Sprite2D
 
