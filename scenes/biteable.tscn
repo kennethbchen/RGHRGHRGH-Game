@@ -45,6 +45,7 @@ visible = false
 [node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_mbyjr")
 volume_db = -10.0
+bus = &"SFX"
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 emitting = false
