@@ -1,0 +1,85 @@
+[gd_scene load_steps=13 format=3 uid="uid://dvjn438lxofij"]
+
+[ext_resource type="Script" path="res://scripts/biteable_prop.gd" id="1_d2ae0"]
+[ext_resource type="PackedScene" uid="uid://c3rg6ralpqeor" path="res://scenes/bite_detector.tscn" id="2_8okrn"]
+[ext_resource type="AudioStream" uid="uid://dorp0ploeac85" path="res://audio/box_damage.wav" id="3_r36nx"]
+[ext_resource type="Texture2D" uid="uid://daxtntoxlrtbj" path="res://sprites/box_particle.png" id="4_6q18l"]
+[ext_resource type="Material" uid="uid://bspfq31lhs2il" path="res://materials/erosion_material.tres" id="5_vkivf"]
+[ext_resource type="Texture2D" uid="uid://dq8qg5mt0a02y" path="res://sprites/box.png" id="6_bpo3g"]
+[ext_resource type="Script" path="res://scripts/node_shake_controller.gd" id="7_06msr"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mbyjr"]
+random_pitch = 2.0
+random_volume_offset_db = 1.0
+streams_count = 1
+stream_0/stream = ExtResource("3_r36nx")
+
+[sub_resource type="Curve" id="Curve_0gxit"]
+max_value = 100.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.204633, 58.5736), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_g4d38"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.050193, 1), 0.0, 0.0, 0, 0, Vector2(0.861004, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_bxu3o"]
+offsets = PackedFloat32Array(0.640693, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gvno0"]
+size = Vector2(56, 58)
+
+[node name="Biteable" type="CharacterBody2D"]
+z_index = -1
+position = Vector2(156, 127)
+collision_layer = 0
+collision_mask = 0
+motion_mode = 1
+script = ExtResource("1_d2ae0")
+angular_velocity_limit = 20.0
+
+[node name="BiteDetector" parent="." instance=ExtResource("2_8okrn")]
+visible = false
+
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_mbyjr")
+volume_db = -10.0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 16
+lifetime_randomness = 0.68
+texture = ExtResource("4_6q18l")
+emission_shape = 1
+emission_sphere_radius = 16.0
+spread = 9.64
+gravity = Vector2(0, 0)
+initial_velocity_min = 600.0
+initial_velocity_max = 800.0
+angular_velocity_min = -500.0
+angular_velocity_max = 500.0
+damping_min = 23.669
+damping_max = 23.669
+damping_curve = SubResource("Curve_0gxit")
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.75
+scale_amount_max = 1.25
+scale_amount_curve = SubResource("Curve_g4d38")
+color_ramp = SubResource("Gradient_bxu3o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_gvno0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("5_vkivf")
+texture = ExtResource("6_bpo3g")
+script = ExtResource("7_06msr")
+offset_decay = 20.0
+speed = 10.0
+
+[connection signal="bite_ended" from="BiteDetector" to="." method="_on_bite_ended"]
+[connection signal="bite_started" from="BiteDetector" to="." method="_on_bite_started"]
+[connection signal="shaken" from="BiteDetector" to="." method="_on_shaken"]
