@@ -8,6 +8,8 @@ enum STATE {NORMAL, BITTEN, DISCARDED}
 
 @export var erosion_levels: int = 30
 
+@export var normal_lifespan: float = 2
+
 @onready var sprite: Sprite2D = $Sprite2D
 
 @onready var particles: CPUParticles2D = $CPUParticles2D
@@ -33,6 +35,9 @@ var current_erosion_level: int = 0:
 
 var particle_emit_start_time: float = 0
 
+var current_lifetime: float = 0
+
+
 signal destroyed()
 
 func _ready() -> void:
@@ -40,6 +45,8 @@ func _ready() -> void:
 	sprite.material.set("shader_parameter/ErosionFactor", 0)
 	
 	particles.emitting = false
+	
+	current_lifetime = Time.get_ticks_msec()
 
 func _process(delta: float) -> void:
 	
@@ -53,9 +60,16 @@ func _process(delta: float) -> void:
 	angular_velocity = clamp(angular_velocity, -angular_velocity_limit, angular_velocity_limit)
 	
 	match current_state:
-		STATE.NORMAL, STATE.DISCARDED:
-			rotation += angular_velocity * delta
+		STATE.NORMAL:
 			
+			if Time.get_ticks_msec() - current_lifetime >= normal_lifespan * 1000:
+				_destroy()
+				
+			rotation += angular_velocity * delta
+			move_and_slide()
+				
+		STATE.DISCARDED:
+			rotation += angular_velocity * delta
 			move_and_slide()
 			
 		STATE.BITTEN:
@@ -111,7 +125,6 @@ func _on_discarded() -> void:
 	tween.parallel()
 	tween.tween_property(sprite, "scale", Vector2(0.5, 0.5), 0.5)
 	tween.finished.connect(_destroy)
-
 
 func _destroy() -> void:
 	destroyed.emit()

@@ -63,6 +63,7 @@ debug_bump_test={
 [layer_names]
 
 2d_physics/layer_1="biteable"
+2d_physics/layer_2="player"
 
 [rendering]
 
