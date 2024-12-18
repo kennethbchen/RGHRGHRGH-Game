@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-enum STATE {NORMAL, BITTEN, DESTROYED}
+enum STATE {NORMAL, BITTEN, DISCARDED}
 
 @export var velocity_limit: float = 800
 
@@ -13,6 +13,8 @@ enum STATE {NORMAL, BITTEN, DESTROYED}
 @onready var particles: CPUParticles2D = $CPUParticles2D
 
 @onready var sfx: AudioStreamPlayer = $SFXPlayer
+
+@onready var bite_detector: BiteDetector = $BiteDetector
 
 var current_state: STATE = STATE.NORMAL
 
@@ -30,6 +32,8 @@ var current_erosion_level: int = 0:
 		current_erosion_level = clamp(current_erosion_level, 0, erosion_levels)
 
 var particle_emit_start_time: float = 0
+
+signal destroyed()
 
 func _ready() -> void:
 	
@@ -49,8 +53,7 @@ func _process(delta: float) -> void:
 	angular_velocity = clamp(angular_velocity, -angular_velocity_limit, angular_velocity_limit)
 	
 	match current_state:
-		STATE.NORMAL:
-			
+		STATE.NORMAL, STATE.DISCARDED:
 			rotation += angular_velocity * delta
 			
 			move_and_slide()
@@ -94,3 +97,22 @@ func _on_bite_ended() -> void:
 	
 	velocity = estimated_velocity
 	angular_velocity = estimated_angular_velocity
+	
+	_on_discarded()
+
+func _on_discarded() -> void:
+	current_state = STATE.DISCARDED
+	
+	# Not biteable anymore
+	bite_detector.disable()
+	
+	var tween = get_tree().create_tween()
+	tween.tween_property(sprite, "modulate", Color(1, 1, 1, 0), 0.5)
+	tween.parallel()
+	tween.tween_property(sprite, "scale", Vector2(0.5, 0.5), 0.5)
+	tween.finished.connect(_destroy)
+
+
+func _destroy() -> void:
+	destroyed.emit()
+	queue_free()

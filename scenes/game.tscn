@@ -141,6 +141,9 @@ motion_mode = 1
 script = ExtResource("6_qxxue")
 angular_velocity_limit = 20.0
 
+[node name="BiteDetector" parent="Biteable" instance=ExtResource("5_7sovw")]
+visible = false
+
 [node name="SFXPlayer" type="AudioStreamPlayer" parent="Biteable"]
 stream = SubResource("AudioStreamRandomizer_mbyjr")
 volume_db = -10.0
@@ -178,9 +181,6 @@ texture = ExtResource("6_nvy1s")
 script = ExtResource("10_004wk")
 offset_decay = 20.0
 speed = 10.0
-
-[node name="BiteDetector" parent="Biteable" instance=ExtResource("5_7sovw")]
-visible = false
 
 [connection signal="shake_combo_ended" from="Player/ShakeComboController" to="MusicPlayer" method="_on_shake_combo_ended"]
 [connection signal="shake_combo_started" from="Player/ShakeComboController" to="MusicPlayer" method="_on_shake_combo_started"]

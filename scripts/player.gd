@@ -43,11 +43,7 @@ func _on_bite_clamp() -> void:
 		hitbox.get_overlapping_areas()[0] is BiteDetector:
 		
 		_bite_object(hitbox.get_overlapping_areas()[0])
-		
-		sfx.play()
-		
-		particles.restart()
-		particles.emitting = true
+
 
 func _on_bite_release() -> void:
 	_release_bitten_object()
@@ -56,11 +52,19 @@ func _bite_object(obj: BiteDetector):
 	
 	if bit_object_detector:
 		return
-		
+	
+	if not obj.is_enabled():
+		return
+	
 	bit_object_detector = obj
 	bite_relative_transform = global_transform.affine_inverse() * obj.global_transform
 	
 	bit_object_detector.start_bite()
+	
+	sfx.play()
+		
+	particles.restart()
+	particles.emitting = true
 	
 func _release_bitten_object():
 	if not bit_object_detector:
