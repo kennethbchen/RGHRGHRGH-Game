@@ -1,16 +1,31 @@
-[gd_scene load_steps=5 format=3 uid="uid://65qp0eh2spt1"]
+[gd_scene load_steps=8 format=3 uid="uid://65qp0eh2spt1"]
 
 [ext_resource type="Script" path="res://addons/simplemenu/simple_menu/simple_menu.gd" id="1_im67f"]
 [ext_resource type="Script" path="res://addons/simplemenu/simple_menu_button_binding.gd" id="2_vl0ae"]
 
 [sub_resource type="Resource" id="Resource_3hns0"]
 script = ExtResource("2_vl0ae")
-button_path = NodePath("../VBoxContainer/StartButon")
+button_path = NodePath("../MenuCanvas/VBoxContainer/StartButon")
 action_type = 3
 scene_to_load = "res://scenes/game.tscn"
 
+[sub_resource type="Resource" id="Resource_1dl30"]
+script = ExtResource("2_vl0ae")
+button_path = NodePath("../MenuCanvas/VBoxContainer/InstructionsButton")
+action_type = 1
+target_nodes = Array[NodePath]([NodePath("../InstructionCanvas")])
+
+[sub_resource type="Resource" id="Resource_xphvq"]
+script = ExtResource("2_vl0ae")
+button_path = NodePath("../InstructionCanvas/VBoxContainer/CloseInstructionsButton")
+action_type = 0
+target_nodes = Array[NodePath]([NodePath("../InstructionCanvas")])
+
 [sub_resource type="LabelSettings" id="LabelSettings_h103t"]
 font_size = 27
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s4trk"]
+bg_color = Color(0.288518, 0.288518, 0.288518, 1)
 
 [node name="Title" type="Control"]
 layout_mode = 3
@@ -22,10 +37,11 @@ grow_vertical = 2
 
 [node name="SimpleMenu" type="Node" parent="."]
 script = ExtResource("1_im67f")
-actions = Array[ExtResource("2_vl0ae")]([SubResource("Resource_3hns0")])
+actions = Array[ExtResource("2_vl0ae")]([SubResource("Resource_3hns0"), SubResource("Resource_1dl30"), SubResource("Resource_xphvq")])
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
+[node name="MenuCanvas" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuCanvas"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -38,16 +54,15 @@ offset_bottom = 99.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="StartButon" type="Button" parent="VBoxContainer"]
+[node name="StartButon" type="Button" parent="MenuCanvas/VBoxContainer"]
 layout_mode = 2
 text = "Start"
 
-[node name="InstructionsButton" type="Button" parent="VBoxContainer"]
+[node name="InstructionsButton" type="Button" parent="MenuCanvas/VBoxContainer"]
 layout_mode = 2
 text = "How To Play"
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 1
+[node name="Label" type="Label" parent="MenuCanvas"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -61,3 +76,59 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "RGHRGHRGH"
 label_settings = SubResource("LabelSettings_h103t")
+
+[node name="InstructionCanvas" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Panel" type="Panel" parent="InstructionCanvas"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InstructionCanvas"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -152.0
+offset_right = 160.0
+offset_bottom = 152.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="InstructionCanvas/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_s4trk")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="InstructionCanvas/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_right = -3.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/bold_italics_font_size = 1
+text = "grab boxes and tear them apart
+
+Aim - Mouse
+
+Grab - Left Click and Hold
+
+Drop - Release Left Click
+
+Destroy Box - Shake Mouse Left / Right
+
+(you can use space instead of left click)
+"
+
+[node name="CloseInstructionsButton" type="Button" parent="InstructionCanvas/VBoxContainer"]
+layout_mode = 2
+text = "Close"
