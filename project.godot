@@ -30,7 +30,7 @@ window/stretch/aspect="keep_width"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/aimsystem/plugin.cfg")
+enabled=PackedStringArray("res://addons/aimsystem/plugin.cfg", "res://addons/simplemenu/plugin.cfg")
 
 [godots]
 
