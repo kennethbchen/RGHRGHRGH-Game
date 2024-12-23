@@ -24,7 +24,9 @@ action_type = 0
 target_nodes = Array[NodePath]([NodePath("../InstructionCanvas")])
 
 [sub_resource type="LabelSettings" id="LabelSettings_h103t"]
-font_size = 27
+font_size = 36
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s4trk"]
 bg_color = Color(0.288518, 0.288518, 0.288518, 1)
@@ -85,6 +87,7 @@ offset_right = 85.5
 offset_bottom = -56.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_type_variation = &"HeaderMedium"
 text = "RGHRGHRGH"
 label_settings = SubResource("LabelSettings_h103t")
 
