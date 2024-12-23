@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://65qp0eh2spt1"]
+[gd_scene load_steps=10 format=3 uid="uid://65qp0eh2spt1"]
 
 [ext_resource type="Script" path="res://addons/simplemenu/simple_menu/simple_menu.gd" id="1_im67f"]
 [ext_resource type="Script" path="res://addons/simplemenu/simple_menu_button_binding.gd" id="2_vl0ae"]
+[ext_resource type="Material" uid="uid://bbasbh6emr8hd" path="res://materials/scrolling_uv_material.tres" id="3_pcgxt"]
+[ext_resource type="Texture2D" uid="uid://bm4axlrvvtdoj" path="res://sprites/title_background.png" id="3_qde2x"]
 
 [sub_resource type="Resource" id="Resource_3hns0"]
 script = ExtResource("2_vl0ae")
@@ -40,6 +42,15 @@ script = ExtResource("1_im67f")
 actions = Array[ExtResource("2_vl0ae")]([SubResource("Resource_3hns0"), SubResource("Resource_1dl30"), SubResource("Resource_xphvq")])
 
 [node name="MenuCanvas" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="MenuCanvas"]
+material = ExtResource("3_pcgxt")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_qde2x")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MenuCanvas"]
 anchors_preset = 8

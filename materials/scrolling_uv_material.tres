@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bbasbh6emr8hd"]
+
+[ext_resource type="Shader" path="res://shaders/scrolling_uv.gdshader" id="1_ftx1e"]
+
+[resource]
+shader = ExtResource("1_ftx1e")
+shader_parameter/direction = Vector2(1, -0.74)
+shader_parameter/speed = 0.1
