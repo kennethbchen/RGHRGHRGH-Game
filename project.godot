@@ -13,6 +13,8 @@ config_version=5
 config/name="RGHRGHRGH"
 run/main_scene="res://scenes/title.tscn"
 config/features=PackedStringArray("4.3")
+boot_splash/bg_color=Color(0.403922, 0.443137, 0.368627, 1)
+boot_splash/show_image=false
 config/icon="res://icon.svg"
 
 [autoload]
