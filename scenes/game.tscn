@@ -48,6 +48,8 @@ metadata/_edit_lock_ = true
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_ip1cf")
+volume_db = -20.0
+pitch_scale = 1.1
 bus = &"Music"
 script = ExtResource("2_yqka2")
 
@@ -66,6 +68,7 @@ script = ExtResource("2_hwhmv")
 
 [node name="SFXPlayer" type="AudioStreamPlayer" parent="Player"]
 stream = ExtResource("6_d21rt")
+bus = &"SFX"
 
 [node name="BiteParticles" type="CPUParticles2D" parent="Player"]
 position = Vector2(43, -0.000148189)
